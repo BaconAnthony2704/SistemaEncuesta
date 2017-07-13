@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+  <body  background="{% static 'img/gradiente55.png' %}" width="200%"/>
+<br>
+<header><h1 id="titulosesion">Sistema de encuesta de la calidad de educacion media</h1></header>
+<br>
+<hr>
+<h4  id="Txtacceder"> Acceder</h4>
+<hr>
+
+<form class="form-horizontal" method="post" action="/admin/login/?next=/">
+{% csrf_token %}
+  
+  <div>
+ 
+    <div class="form-group">
+    <h4  style="text-align: left" id="usuarioS">Usuario</h4>
+      <input type="text" id="usr" name="username" placeholder="Ingrese su usuario">
+    </div>
+  </div>
+  <div>
+  <br>
+    <div class="form-group">
+    <h4 id="contraS" class="form-group">Contraseña</h4> 
+      <input type="password" id="psw" name="password" placeholder="Ingrese su contraseña">
+    </div>
+  </div>
+  
+  <div> 
+    <div class="form-group">
+
+  </div>
+      <button type="submit" style="background: LightSlateGray; border-color: black; margin-bottom: 0%; margin-left: 0%; margin-right: 0%;margin-top: 0%" id="btnEntrar">Ingresar</button>
+     
+    </div>
+
+  </div>
+  
+  
+  
+</form>
+
+{% endblock contenido %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block EstilosCSS %}
+{{ block.super }}
+
+
+
+{% endblock EstilosCSS %}
+{% block contenido %}
+
+<body  background="{% static 'img/educaciontrans.png' %}" width="200%"/>
+
+<!--<div align="center">{{form}}</div>-->
+
+ <br>
+
+<center><h2 id="titulosesion">Listado de encuestas disponibles</h2></center>
+ <hr class="hr2">
+<form>
+    
+        
+    <div class="container"> 
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><h4>Titulo de la encuesta</h4></th>
+        <th><h4>Compartir Facebook</h4></th>
+        <th><h4>Compartir Twitter</h4></th>
+        <th><h4>Compartir Google+</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+    {%for encuesta in encuestas %}
+      <tr>
+        <td><a href="{% url 'educacion:validar_captcha2' encuesta.id %}" id="EnunciadoEncuestas">{{forloop.counter}}.&nbsp{{encuesta.titulo}}</a></td>
+        <td><iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2F{{host}}%3A8000%2FcaptchaValidar%2F{{encuesta.id}}%2F&layout=button&size=large&mobile_iframe=true&width=98&height=28&appId" width="98" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true">
+        </iframe></td>
+        <td><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/encuesta" data-size="large" data-dnt="true">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></td>
+        <td><div>
+    <script src="https://apis.google.com/js/platform.js" async defer>
+    {lang: 'es-419'}
+    </script>
+
+    <div class="g-plus" data-action="share" data-height="24" data-href="http://127.0.0.1:8000/encuesta/"></div>
+    </div></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>                                                 
+ 
+    </div>
+     <div class="row text-center">
+        <div class="col-lg-12">
+            <ul class="pagination">
+
+                {% if encuestas.has_previous %}
+                <li><a href="?page={{ encuesta.previous_page_number }}&#encuesta">Anterior</a></li>
+                {% endif %}
+
+                {% for pg in encuestas.paginator.page_range %}
+                {% if encuestas.number == pg %}
+                <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% else %}
+                <li><a href="?page={{ pg }}&#encuesta">{{ pg }}</a></li>
+                {% endif %}
+                {% endfor%}
+                {% if encuestas.has_next %}
+                <li><a href="?page={{ encuestas.next_page_number }}&#encuesta">Siguiente</a></li>
+                {% endif %}
+                
+            </ul>
+        </div>
+        <li>
+      
+     </li>
+    </div>
+
+  <center><a  class="btn btn-primary" href="/">Regresar a la pagina de inicio<a></center>
+</form>
+
+</form>
+
+</body>
+{% endblock contenido %}

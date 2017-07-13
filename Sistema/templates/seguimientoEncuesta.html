@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load mathfilters %}
+{% block contenido %}
+  <body  background="{% static "img/fondoNaranja.png" %}" width="200%"/>
+	 <form>
+   <br>
+ 	<center><h2 id="titulosesion">Ver seguimiento de los resultados</h2></center>
+  <hr class="hr2">
+  
+	<div class="container">
+  	<p id="textoSeguimiento">A continuación se presentan los estados actuales de las encuestas citadas:</p> 
+  	<table class="table ">
+
+    	<thead>
+      		<tr>
+        		<th id="colornegro">Encuestas</th>
+            <th>Muestra</th>
+            <th>Cantidad de encuestas realizadas</th>
+        		<th>Faltante</th>
+      		</tr>
+
+    	</thead>
+    	{%for encuesta in encuestas %}
+    		<tbody>
+      			<tr>
+        		<td><a id="nomcolor" href="{% url 'educacion:seguimiento' encuesta.id %}">{{encuesta.titulo}}
+            &nbsp&nbsp {% if 3|sub:encuesta.realizadas == 0 %} 
+            (Finalizada)
+            {% endif %}</a></td>
+            <td>3</td>
+            <td>{{encuesta.realizadas}}</td>
+            <td>
+            {{3|sub:encuesta.realizadas}}
+             
+             
+            </td></tr>
+    		</tbody>
+    	{% endfor %}
+  	</table>
+	</div>
+  <br>
+  <br>
+	<center><a  class="btn btn-primary" href="/">Regresar a la pagina de inicio<a></center>
+	</form>
+  </body>
+{% endblock contenido %}

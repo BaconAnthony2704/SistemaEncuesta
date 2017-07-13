@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+	<body  background="{% static 'img/estadistico.png'%}" width="200%"/>
+	 <form>
+   <br>
+ 	<center><h2 id="titulosesion">Ver seguimiento de los resultados</h2></center>
+  <hr>
+  
+	<div class="container">
+  	<p id="textoSeguimiento">A continuación se presentan los estados actuales de las encuestas citadas:</p> 
+  	<table class="table table-striped">
+
+    	<thead>
+      		<tr>
+        		<th>Encuestas</th>
+      		</tr>
+
+    	</thead>
+    	{%for encuesta in encuestas %}
+    		<tbody>
+      			<tr>
+        		<td><a href="{% url 'educacion:seguimiento' encuesta.id %}">{{forloop.counter}}.&nbsp{{encuesta.titulo}}
+            </td>
+            </tr>
+    		</tbody>
+    	{% endfor %}
+  	</table>
+	</div>
+
+	<center><a  class="btn btn-primary" href="/">Regresar a la pagina de inicio<a></center>
+	</form>
+  </body>
+{% endblock contenido %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+ <body  background="{% static 'img/turquesasolido.png' %}" width="200%"/>
+        <div id="page-wrapper">
+                <div >
+                    <div class="col-lg-20">
+                        <center><h2 id="titulosesion">Encuestas Guardadas</h2></center>
+                        <div class="table-responsive">
+                        {% for encuesta in encuestas %}
+                            <div class="container">
+                            
+                           <hr class="hr2">
+                                  <h6 id="titulosesion">{{encuesta.titulo}}</h2>
+                                  <p>Tablas en base de la encuestas guardadas</p>            
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Preguntas</th>
+                                        <th>Respuestas</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                      {% for pregunta in preguntas %}
+                                      {% if  pregunta.encuesta_id == encuesta.id %}
+                                          <tr><td>{{pregunta.nombre}}</td>
+                                          {% for respuesta in respuestas %}
+                                          {% if  respuesta.pregunta_id == pregunta.id %}
+                                             <td>{{respuesta.titulo}}</td> 
+                                          {% endif %}
+                                          
+                                      {% endfor %}
+                                          
+                                      {% endif %}
+                                          </tr>
+                                      {% endfor %}
+                                        
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                        {% endfor %}
+                        <center><a class="btn btn-primary btn-md" href="/">Regresar</a>
+                        </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+{% endblock contenido %}

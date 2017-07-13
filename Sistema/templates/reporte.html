@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+
+  <body  background="{% static 'img/green.jpeg' %}" width="200%"/>
+<br>
+<header>
+<h1 id="titulosesion">Resumen de datos obtenidos</h1></header>
+<hr class="hr2">
+<br>
+    <div class="container">
+  <h2>Tabla conceptual de encuesta por pregunta</h2>
+  <p>Es un breve analisis de como es la tendencia de cada encuesta con sus respectivas preguntas, se basara en la percepcion de la calidad de educacion de educacion media</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Encuestas</th>
+        <th>Cantidad de preguntas</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for contar in contar %}
+        {% for encuesta in encuesta %}   
+      <tr class="success">
+            {% if encuesta.id == contar.encuesta_id %}
+                <td>{{encuesta.titulo}}</td>
+                <td>{{contar.total}}</td>
+            {% endif %}
+        {% endfor %} 
+        {% endfor %}
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+     <center><div id="container" style="min-width: 310px; height: 400px; max-width: 900px; margin: 0auto"></div></center>
+
+     <script type="text/javascript">
+     Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Encuesta por pregunta'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+        {% for contar in contar %}
+        {% for encuesta in encuesta %}   
+            {% if encuesta.id == contar.encuesta_id %}
+                '{{encuesta.titulo}}',
+            {% endif %}
+        {% endfor %} 
+        {% endfor %}
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'No de pregunta(s)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} pregunta(s)</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name:
+        'Cantidad de preguntas',    
+        data: [
+        {% for contar in contar %}
+        {% for encuesta in encuesta %}   
+            {% if encuesta.id == contar.encuesta_id %}
+                {{contar.total}},
+            {% endif %}
+        {% endfor %} 
+        {% endfor %}
+        
+        ]
+        
+    }]
+});
+      
+     </script>
+     <br>
+     <br>
+    <div class="container">
+ 
+  <div class="panel-group">
+    {% for reporte in des_reporte %}
+      <div class="panel panel-primary">
+      <div class="panel-heading">{{reporte.encuesta.titulo}}</div>
+      <div class="panel-body">{{reporte.descripcion}}</div>
+    </div> <br>
+    {% endfor %}
+    </div><br>
+    
+<br>
+
+      <center><a  class="btn btn-primary" href="/">Regresar a la pagina de inicio<a></center>
+</body>
+{% endblock contenido %}
+
+{% block JSGrafico %}
+	<script src="{% static 'js/highcharts.js' %}"></script>
+{% endblock JSGrafico %}
+
+</div>

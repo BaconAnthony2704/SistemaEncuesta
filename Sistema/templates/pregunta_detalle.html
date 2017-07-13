@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block contenido %}
+<body background="{% static 'img/gradiente7.jpg' %}">
+<h1 class="white typed" style="color: white">{{pregunta.nombre}}</h1>
+<br><br><br><br>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+	<form class="list-group-item" action="{% url 'educacion:estadistica' pregunta.id %}" method="post">
+	{% csrf_token %}
+		{% for respuesta in pregunta.respuesta_set.all %}
+    		<input type="radio" name="respuesta" id="respuesta{{ forloop.counter }}" value="{{ respuesta.id }}" />
+    		<h4><label class="list-group-item" for="respuesta{{ forloop.counter }}">{{ respuesta.titulo }}</label></h4><br />
+		{% endfor %}
+		<center><input class="btn btn-primary btn-md" type="submit" value="Elija su respuesta!"></center>
+
+	</form>
+</body>
+{% endblock contenido %}

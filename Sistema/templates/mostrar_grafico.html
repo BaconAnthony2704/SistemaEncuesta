@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load mathfilters %}
+{% block contenido %}
+<body  background="{% static 'img/gradiente3.png' %}" width="200%"/>
+	
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<script type="text/javascript">
+		Highcharts.chart('container', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: '{{encuesta.titulo}}'
+    },
+    subtitle: {
+        text: '{{pregunta.nombre}}'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Respuesta',
+        data: [
+           
+            {% for respuesta in pregunta.respuesta_set.all %}
+            ['{{respuesta.titulo}}', {{respuesta.frecuencia}}],
+            {% endfor %}
+            
+        ]
+    }]
+});
+	</script>
+
+<div >
+  <h2>Percepcion de la poblacion acerca de la calidad de educacion</h2>
+  <p>La educación tiene como objetivo permitir a todas las personas  que desarrollen todas sus capacidades y talentos sin distinciones, es decir, que todas las personas evolucionen independientemente de sus características evolutivas, personales, sociales y culturales.</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Analisis</th>
+        <th>Respuesta</th>
+        <th>Frecuencia</th>
+        <th>Porcentaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Menos votado</td>
+        <td>{% for respuesta in pregunta.respuesta_set.all %}
+            {% if minimo == respuesta.frecuencia %}
+                {{respuesta.titulo}}
+            {% endif %}
+        {% endfor %} </td>
+        <td>{{minimo}}</td>
+        <td>{{minimo|mul:100|div:suma|floatformat:-2}}%</td>
+      </tr>
+      <tr>
+        <td>Mas votado</td>
+        <td>{% for respuesta in pregunta.respuesta_set.all %}
+            {% if maximo == respuesta.frecuencia %}
+                {{respuesta.titulo}}
+            {% endif %}
+        {% endfor %}</td>
+        <td>{{maximo}}</td>
+        <td>{{maximo|mul:100|div:suma|floatformat:-2}}%</td>
+      </tr>
+  
+    </tbody>
+  </table>
+</div>
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+    Highcharts.chart('container1', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '{{encuesta.titulo}}'
+    },
+    subtitle: {
+        text: '{{pregunta.nombre}}'
+    },
+    xAxis: {
+        categories: [{% for respuesta in pregunta.respuesta_set.all %}
+            '{{respuesta.titulo}}',
+        {% endfor %}
+        
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'Tendencia (Votos)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [
+    {
+        name: 'Respuesta',
+        data: [{% for respuesta in pregunta.respuesta_set.all %}
+            {{respuesta.frecuencia}},
+        {% endfor %}
+        ]
+    }]
+});
+</script>
+
+</body>
+
+
+<center><a href="{% url 'educacion:seguimiento' encuesta.id %}" class="btn btn-primary">Regresar</a></center>
+{% endblock contenido %}
+{% block JSGrafico %}
+	<script src="{% static 'js/highcharts.js' %}"></script>
+	<script src="{% static 'js/exporting.js'%}"></script>
+{% endblock JSGrafico %}

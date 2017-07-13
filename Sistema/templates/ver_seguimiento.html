@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block contenido %}
+{% load staticfiles %}
+<body background="{% static "img/gradiente6.jpg" %}">
+<center><h4>Resultados de las encuestas</h4></center>
+	 <div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{cpregunta}}%">
+    Preguntas
+  </div>
+</div>
+
+
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">{{encuestas.titulo}}</div>
+      <div class="panel-body">
+      {% for pregunta in  encuestas.pregunta_set.all %}
+        {{forloop.counter}}.&nbsp<a href="{% url 'educacion:grafico' pregunta.id %}">{{pregunta.nombre}}</a><br>
+      {% endfor %}
+
+      </div>
+    </div>
+    {% if user.is_authenticated %}
+      <center><a class="btn btn-primary btn-small" href="/tablas">Ver tablas de encuesta</a></center><br>
+    {% endif %}
+	
+	   {% if user.is_authenticated %}
+       <center><a class="btn btn-primary btn-md" href="/seguimientoEncuesta">Regresar</a></center>
+       {% else %}
+       <center><a class="btn btn-primary btn-md" href="/seguimiento_usuario">Regresar</a></center>
+     {% endif %}
+  
+</body>
+{% endblock contenido%}

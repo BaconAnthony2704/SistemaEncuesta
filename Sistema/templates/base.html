@@ -1,0 +1,156 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Percepcion de la calidad de educacion</title>
+    {% block EstiloCSS %}
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    {% endblock EstiloCSS %}
+    
+    {% block JSGrafico %}
+        
+    {% endblock JSGrafico %}
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Inicio</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                {% if user.is_authenticated %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{user.username}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      
+                        
+                        <li>
+                            <a href="/logout/"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+                {% else %}
+                <li class="dropdown">
+                    <a href="/accounts/login/" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Inicie Sesion<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/accounts/login/"><i class="fa fa-fw fa-user"></i> Iniciar Sesion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+            
+
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="/encuesta"><i class="fa fa-file-text-o"></i>  Realizar Encuesta</a>
+                    </li>
+                    {% if user.is_authenticated == 0 %}
+                        <li><a href="/seguimiento_usuario"><i class="fa fa-fw fa-bar-chart-o"></i> Ver seguimiento</a></li>
+                    {% endif %}
+                    
+                    {% if user.is_authenticated %}
+                    <li>
+                    <a href="/seguimientoEncuesta"><i class="fa fa-fw fa-bar-chart-o"></i> Ver seguimiento</a>
+                    </li>
+                    <li>
+                        <a href="/tablas"><i class="fa fa-fw fa-table"></i> Tablas de encuesta</a>
+                    </li>
+                    <li>
+                        <a href="/admin"><i class="fa fa-fw fa-edit"></i> Editar encuesta</a>
+                    </li>
+                  <li>
+                        <a href="/reporte"><i class="fa fa-fw fa-table"></i> Presentar Resumen</a>
+                    </li>
+
+                     
+                    {% endif %}}
+                    <hr>
+                    <li>
+                        <a href="/nosotros"><i class="fa fa-info"></i> Quienes Somos </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        {% block contenido %}
+        <body background="{% static 'img/bannerpro.png' %}" width="200%"/>
+       
+        <div class="container">
+        <br>
+        <br>
+        <center><img src="{% static 'img/BannerEdusy.jpg' %}" class="img-thumbnail" alt="Cinque Terre" width="430" height="436"></center>
+           <br>
+            <h1 id="tituloIS">Percepción de la educación<br> media en El Salvador</h1>
+         <center> <a id="subtitulo" href="/encuesta/"></i>Resolver la encuesta ahora </a></center> 
+           
+        </div>
+        <div class="container">
+        <br>
+        <br>
+       <center><img class="fotoEdusy2" src="{% static 'img/edusy.png' %}"></center>
+  <br>
+    <br>
+    <br>
+      </br>
+      </br>
+    </br>
+  </br>
+  </div>
+    {% endblock contenido %}
+    {% block JS %}
+    <script src="{% static 'js/jquery.js'%}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Morris Charts JavaScript -->
+    {% endblock %}
+    <!-- jQuery -->
+    
+
+</body>
+
+
+</html>

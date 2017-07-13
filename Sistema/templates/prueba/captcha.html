@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+<body  background="{% static 'img/gradiente5.jpg' %}" width="200%"/>
+<br>
+<h1 id="titulosesion">Validación captcha</h1>
+ <hr class="hr2">
+<br>
+	<div >
+	<form method="post">
+	{% csrf_token %}
+		<center><div><h2>Introduzca el texto que lee en la imágen:<br><br>{{form.captcha}}</h2></div></center>
+		{% if form.captcha.errors %}
+ 		{{form.captcha.errors}}
+
+		{% endif %}
+		<div>
+		<center><button type="submit" class="btn btn-primary">Acceder</button></center>
+		</div>
+	</form>
+</div>
+	<br>
+
+
+{% endblock contenido %}
+

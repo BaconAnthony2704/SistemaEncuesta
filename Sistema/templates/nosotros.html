@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+<style> 
+.newspaper {
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+
+    -webkit-column-rule: 4px outset #000000; /* Chrome, Safari, Opera */
+    -moz-column-rule: 4px outset #000000; /* Firefox */
+    column-rule: 4px outset #000000;
+}
+</style>
+
+<style>
+.newspaper2 {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+</style>
+  <body style="background: url({% static 'img/gradiente5.jpg' %})" width="200%">
+<br>
+<center><h2 id="titulosesion">Quienes Somos</h1></center>
+<br>
+<div class="newspaper2 container">
+<h4>UNIVERSIDAD DE EL SALVADOR <br> <br>
+Facultad de Ingenieria y Arquitectura <br> <br>
+Escuela de Ingenieria de Sistemas informaticos <br><br>
+Herramientas de productividad</h4>
+<img src="{% static 'img/logo_ues.png' %}" class="img-thumbnail" alt="Cinque Terre" width="190" height="136">
+</div>
+<hr class="hr2">
+<div class=" newspaper2 container">
+  <h4>EDUSY es un sistema de encuestas para el procesamiento de la información sobre la percepción del nivel de la Educación Media del país.
+  La aplicación permite consultar los resultados estadísticos, gráficos, informes, que sean generados por el sistema que contenga un conjunto de datos enteros, permite la depuración de preguntas a la encuesta, así como el ingreso de nuevas preguntas individuales; todo esto si se identifica como administrador del sistema.
+  <br> <br>
+  Permite la edición de las fórmulas matemáticas que se aplican para obtener la información requerida de la encuesta reflejada en un gráfico de pastel.
+  Los datos a procesar son obtenidos de fuentes confiables, debiendo especificar dichas fuentes. <br> <br>Ademas brinda un resumen correspondiente a todas las encuestas completadas por los N usuarios que hayan finalizado <br>
+</h4>
+  <img src="{% static 'img/edusy.png' %} " class="img-thumbnail" alt="Cinque Terre" width="190" height="136">
+</div>
+
+<hr class="hr2">
+<center><h2 id="titulosesion">Equipo de trabajo</h1></center>
+<form class="form-horizontal" method="post" action="/admin/login/?next=/">
+{% csrf_token %}
+  
+  <div>
+  <center><h6 id="titulosesionp"> La presente aplicación informática ha sido fruto de la colaboración de: </h3></center>
+  </div>
+<br>
+<br>
+  <div class="media container">
+  <div class="media-left media-top">
+    <img src="{% static 'img/AnthonyIMG.png' %}" class="media-object" style="width:60px">
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Hernandez Mendoza, Bryan Anthony</h4>
+    <p>Project Manager - Developer <br>
+    Se ha facilitado el uso de herramientas colaborativas para el desarrollo de la aplicacion como ser posible, se ha utilizado una herramienta de programacion de proyecto, una de control de incidencia y asi tambien como una herramienta de control de versiones</p>
+  </div>
+</div>
+<br>
+<div class="media container">
+  <div class="media-left media-top">
+    <img src="{% static 'img/ErnestoIMG.png' %}" class="media-object" style="width:60px">
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Hernández Vásquez, José Ernesto</h4>
+    <p>Tester - Developer <br>
+    Se ha facilitado el uso de herramientas colaborativas para el desarrollo de la aplicacion como ser posible, se ha utilizado una herramienta de programacion de proyecto, una de control de incidencia y asi tambien como una herramienta de control de versiones</p>
+  </div>
+</div>
+  <br>
+  <div class="media container">
+  <div class="media-left media-top">
+    <img src="{% static 'img/MauroIMG.png' %}" class="media-object" style="width:60px">
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Jovel Cruz, Mauro Adán</h4>
+    <p>CSS Styles Manager - Developer <br>
+    Se ha facilitado el uso de herramientas colaborativas para el desarrollo de la aplicacion como ser posible, se ha utilizado una herramienta de programacion de proyecto, una de control de incidencia y asi tambien como una herramienta de control de versiones</p>
+  </div>
+</div>
+  
+  <div> 
+    <div class="form-group">
+    <br><br>
+    <div class="newspaper container">
+Se espera el desarrollo de un sistema de encuestas que permita recabar la opinión individual de los encuestados sobre aspectos específicos de la educación media en El Salvador, estos datos se verán reflejados en un resumen final que describa los resultados y en un gráfico para facilitar la compresión de las cifras.
+Además de las tareas anteriormente mencionadas el administrador podrá acceder a una ventana de control donde se le habilitará la modificación del contenido de la encuesta, estas modificaciones serán:<br> 
+• Agregar una nueva pregunta <br>
+• Eliminar una pregunta almacenada en la base de datos según su número correlativo. <br>
+• Modificar una pregunta almacenada en la base de datos según su número correlativo <br>
+Los resultados se podrán compartir por medio de las redes sociales para su fácil distribución, todo ello será realizado solo si el administrador así lo desea
+
+</div>
+      <li>
+      <center><a  class="btn btn-primary" href="/">Regresar a la pagina de inicio<a></center>
+     </li>
+    <br>
+    <br><p align="center">
+   
+    </br></p>
+     
+    </div>
+
+  </div>
+
+
+  
+  
+</form>
+
+ 
+{% endblock contenido %}
