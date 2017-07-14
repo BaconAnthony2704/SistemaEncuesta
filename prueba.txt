@@ -1,0 +1,17 @@
+commit 824b0bb44fbf242a3aed3f3561c559deeb58a29e
+Author: Anthony <proanthonyhdez@gmail.com>
+Date:   Thu Jul 13 13:33:41 2017 -0600
+
+    Se quito un integrante
+
+commit c015ec9ce4e62ab7e6ebf0185f1dd1715e741529
+Author: Anthony <proanthonyhdez@gmail.com>
+Date:   Thu Jul 13 13:29:51 2017 -0600
+
+    Agregamos la migracion a GIT
+
+commit ba7b31f14997675cb3a566705370248c51ecdac9
+Author: Anthony <proanthonyhdez@gmail.com>
+Date:   Thu Jul 13 13:27:12 2017 -0600
+
+    Sistema Final 1
